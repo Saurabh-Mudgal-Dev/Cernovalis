@@ -1,0 +1,34 @@
+PLAN.md
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+venv/
+env/
+.venv/
+.env
+
+# Dependencies & build outputs
+node_modules/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Large ML data & serialized artifacts
+backend/ml/data/raw/*.csv
+!backend/ml/data/raw/.gitkeep
+backend/ml/models/saved/*.joblib
+!backend/ml/models/saved/.gitkeep
+backend/ml/models/vectorizers/*.joblib
+!backend/ml/models/vectorizers/.gitkeep
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
