@@ -22,6 +22,8 @@ build/
 # Large ML data & serialized artifacts
 backend/ml/data/raw/*.csv
 !backend/ml/data/raw/.gitkeep
+backend/ml/data/processed/*.csv
+!backend/ml/data/processed/.gitkeep
 backend/ml/models/saved/*.joblib
 !backend/ml/models/saved/.gitkeep
 backend/ml/models/vectorizers/*.joblib
