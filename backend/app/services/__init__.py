@@ -5,7 +5,9 @@ from backend.app.services.preprocessor import (
     TextPreprocessor,
     clean_text_regex,
     expand_contractions,
+    filter_stopwords,
     remove_wire_artifacts,
+    tokenize_text,
 )
 
 __all__ = [
@@ -13,5 +15,7 @@ __all__ = [
     "TextPreprocessor",
     "expand_contractions",
     "remove_wire_artifacts",
+    "filter_stopwords",
+    "tokenize_text",
     "CONTRACTION_MAP",
 ]
