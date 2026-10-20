@@ -11,6 +11,11 @@ from backend.app.utils.text_features import (
     extract_text_statistics,
     stylometric_feature_names,
 )
+from backend.app.utils.tfidf_vectorizer import (
+    TfidfVectorizerWrapper,
+    combine_title_text,
+    split_train_test,
+)
 
 __all__ = [
     "extract_all_stylometric_features",
@@ -22,4 +27,7 @@ __all__ = [
     "extract_subjectivity_features",
     "extract_text_statistics",
     "stylometric_feature_names",
+    "TfidfVectorizerWrapper",
+    "combine_title_text",
+    "split_train_test",
 ]
