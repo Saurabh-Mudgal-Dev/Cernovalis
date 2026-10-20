@@ -1,5 +1,6 @@
 """Utility modules for the Cernovalis backend."""
 
+from backend.app.utils.feature_pipeline import FeaturePipeline
 from backend.app.utils.text_features import (
     extract_all_stylometric_features,
     extract_capitalization_features,
@@ -18,6 +19,7 @@ from backend.app.utils.tfidf_vectorizer import (
 )
 
 __all__ = [
+    "FeaturePipeline",
     "extract_all_stylometric_features",
     "extract_capitalization_features",
     "extract_lexical_diversity_features",

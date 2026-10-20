@@ -16,14 +16,14 @@ import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 
-# PLAN.md Section 4.B TF-IDF configuration
+# TF-IDF configuration
 DEFAULT_MAX_FEATURES = 10000
 DEFAULT_NGRAM_RANGE = (1, 3)
 DEFAULT_SUBLINEAR_TF = True
 DEFAULT_MIN_DF = 1
 DEFAULT_MAX_DF = 1.0
 
-# Default persistence paths (PLAN.md backend config)
+# Default persistence path
 DEFAULT_VECTORIZER_PATH = Path("backend/ml/models/vectorizers/tfidf_vectorizer.joblib")
 
 
