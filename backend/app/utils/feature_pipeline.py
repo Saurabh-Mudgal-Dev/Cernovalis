@@ -5,11 +5,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List, Tuple
 
-# pyrefly: ignore[missing-import]
 import joblib
-# pyrefly: ignore[missing-import]
 import numpy as np
-# pyrefly: ignore[missing-import]
 from scipy.sparse import csr_matrix, hstack
 
 from backend.app.utils.text_features import (

@@ -1,10 +1,7 @@
 """Tests for the unified feature pipeline."""
 
-# pyrefly: ignore[missing-import]
 import numpy as np
-# pyrefly: ignore[missing-import]
 import pytest
-# pyrefly: ignore[missing-import]
 from scipy.sparse import issparse
 
 from backend.app.utils.feature_pipeline import FeaturePipeline

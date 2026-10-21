@@ -95,13 +95,11 @@ def train_vectorizer(
         X_train = vectorizer.transform(train_docs)
         try:
             
-            # pyrefly: ignore[missing-import]
             from scipy.sparse import save_npz
 
             save_npz(str(features_path), X_train)
         except ImportError:  # pragma: no cover - scipy always present with sklearn
 
-            # pyrefly: ignore[missing-import]
             import numpy as np
 
             np.save(str(features_path), X_train.toarray())

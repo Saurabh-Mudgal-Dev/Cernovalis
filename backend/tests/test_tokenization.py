@@ -1,6 +1,5 @@
 """Tests for tokenization utilities."""
 
-# pyrefly: ignore[missing-import]
 import pytest
 
 from backend.app.services.preprocessor.tokenization import tokenize_text

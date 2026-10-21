@@ -11,7 +11,6 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List, Tuple, Union
 
-# pyrefly: ignore[missing-import]
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split

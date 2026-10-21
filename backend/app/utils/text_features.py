@@ -31,7 +31,6 @@ def _get_vader():
     global _vader
     if _vader is None:
 
-        # pyrefly: ignore[missing-import]
         from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
         _vader = SentimentIntensityAnalyzer()

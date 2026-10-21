@@ -73,13 +73,11 @@ def train_pipeline(
     matrix_path.parent.mkdir(parents=True, exist_ok=True)
     try:
 
-        # pyrefly: ignore[missing-import]
         from scipy.sparse import save_npz
 
         save_npz(str(matrix_path), matrix)
     except ImportError:
         
-        # pyrefly: ignore[missing-import]
         import numpy as np
 
         np.save(str(matrix_path), matrix.toarray())

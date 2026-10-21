@@ -3,9 +3,7 @@
 from pathlib import Path
 import tempfile
 
-# pyrefly: ignore[missing-import]
 import numpy as np
-# pyrefly: ignore[missing-import]
 import pytest
 
 from sklearn.feature_extraction.text import TfidfVectorizer

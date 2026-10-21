@@ -36,7 +36,6 @@ class TextPreprocessor:
         if remove_stopwords:
             if custom_stopwords is None:
 
-                # pyrefly: ignore[missing-import]
                 from spacy.lang.en.stop_words import STOP_WORDS
 
                 custom_stopwords = STOP_WORDS
@@ -49,7 +48,6 @@ class TextPreprocessor:
 
     def _load_spacy(self, model_name: str) -> None:
         
-        # pyrefly: ignore[missing-import]
         import spacy
 
         try:

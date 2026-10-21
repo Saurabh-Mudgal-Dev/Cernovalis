@@ -18,7 +18,6 @@ def filter_stopwords(
     """
     if stopwords is None:
         
-        # pyrefly: ignore[missing-import]
         from spacy.lang.en.stop_words import STOP_WORDS
 
         stopwords = STOP_WORDS

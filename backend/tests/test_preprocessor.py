@@ -1,6 +1,5 @@
 """Tests for the TextPreprocessor class."""
 
-# pyrefly: ignore[missing-import]
 import pytest
 
 from backend.app.services.preprocessor import TextPreprocessor
@@ -76,7 +75,6 @@ def test_batch_matches_single(use_spacy, request):
 
 def test_spacy_options(spacy_preprocessor, monkeypatch):
     
-    # pyrefly: ignore[missing-import]
     import spacy
 
     # Reuse the loaded model without changing the shared fixture's configuration.
@@ -105,7 +103,6 @@ def test_invalid_configuration():
 
 def test_missing_model_has_actionable_error(monkeypatch):
 
-    # pyrefly: ignore[missing-import]
     import spacy
 
     def missing_model(*args, **kwargs):
