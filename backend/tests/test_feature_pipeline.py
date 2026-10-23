@@ -113,3 +113,26 @@ def test_pipeline_joblib_roundtrip_preserves_config(tmp_path, sample_titles, sam
     assert loaded.tfidf.max_features == 500
     assert loaded.tfidf.ngram_range == (1, 2)
     assert loaded.tfidf.sublinear_tf is False
+
+
+def test_pipeline_save_persists_vectorizer_and_scaler(
+    tmp_path, sample_titles, sample_texts
+):
+    pipeline = FeaturePipeline(max_features=1000)
+    pipeline.fit(sample_titles, sample_texts)
+
+    pipeline_path = tmp_path / "pipeline.joblib"
+    vectorizer_path = tmp_path / "tfidf_vectorizer.joblib"
+    scaler_path = tmp_path / "feature_scaler.joblib"
+
+    pipeline.save(pipeline_path, vectorizer_path, scaler_path)
+
+    assert pipeline_path.exists()
+    assert vectorizer_path.exists()
+    assert scaler_path.exists()
+
+    from backend.app.utils.feature_scaler import FeatureScaler
+
+    loaded_scaler = FeatureScaler.load(scaler_path)
+    assert loaded_scaler._fitted
+    assert loaded_scaler.n_features == len(pipeline.feature_names) - pipeline.tfidf.n_features
