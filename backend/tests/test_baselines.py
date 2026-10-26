@@ -1,4 +1,4 @@
-"""Tests for the Logistic Regression and Naive Bayes baselines."""
+"""Tests for the Logistic Regression and Naive Bayes baselines and the Random Forest."""
 
 import numpy as np
 import pytest
@@ -7,16 +7,22 @@ from scipy.sparse import csr_matrix
 from backend.app.utils.baselines import (
     DEFAULT_LOGISTIC_C_VALUES,
     DEFAULT_NB_ALPHAS,
-    FAKE_LABEL,
-    REAL_LABEL,
+    DEFAULT_RF_MAX_DEPTH,
+    DEFAULT_RF_MIN_SAMPLES_SPLIT,
+    DEFAULT_RF_N_ESTIMATORS,
     evaluate_model,
     save_model,
     train_logistic_regression,
     train_naive_bayes,
+    train_random_forest,
     tune_logistic_regression,
     tune_naive_bayes,
+    tune_random_forest,
 )
 from backend.app.utils.dataset_split import stratified_split
+
+FAKE_LABEL = 0
+REAL_LABEL = 1
 
 
 @pytest.fixture
@@ -127,3 +133,96 @@ def test_stratified_split_produces_nonempty_val_and_test():
     split = stratified_split(labels)
     train, val, test = split.subset(labels)
     assert len(train) > 0 and len(val) > 0 and len(test) > 0
+
+
+def test_train_random_forest_default_params(separable_features):
+    X, y = separable_features
+    model = train_random_forest(X, y, n_estimators=10, n_jobs=1)
+    assert model.n_estimators == 10
+    predictions = model.predict(X)
+    assert len(predictions) == len(y)
+
+
+def test_train_random_forest_reproducible(separable_features):
+    X, y = separable_features
+    model = train_random_forest(X, y, n_estimators=10, random_state=42, n_jobs=1)
+    clone = train_random_forest(X, y, n_estimators=10, random_state=42, n_jobs=1)
+    np.testing.assert_array_equal(model.predict(X), clone.predict(X))
+
+
+def test_tune_random_forest_picks_grid_member(separable_features):
+    X, y = separable_features
+    X_train, X_val = X[:50], X[50:]
+    y_train, y_val = y[:50], y[50:]
+    model, results = tune_random_forest(
+        X_train, y_train, X_val, y_val,
+        n_estimators=[10],
+        max_depths=[None, 3],
+        min_samples_splits=[2],
+        n_jobs=1,
+    )
+    assert len(results) == 2
+    assert set(r["params"]["max_depth"] for r in results) == {None, 3}
+    params = model.get_params()
+    assert params["max_depth"] in (None, 3)
+    assert params["n_estimators"] == 10
+    assert params["min_samples_split"] == 2
+    for r in results:
+        assert r["val_metrics"]["n_samples"] == len(y_val)
+
+
+def test_tune_random_forest_grid_size(separable_features):
+    X, y = separable_features
+    X_train, X_val = X[:50], X[50:]
+    y_train, y_val = y[:50], y[50:]
+    _, results = tune_random_forest(
+        X_train, y_train, X_val, y_val,
+        n_estimators=[10],
+        max_depths=[None, 3],
+        min_samples_splits=[2, 5],
+        n_jobs=1,
+    )
+    assert len(results) == 4
+
+
+def test_tune_random_forest_is_deterministic(separable_features):
+    X, y = separable_features
+    X_train, X_val = X[:50], X[50:]
+    y_train, y_val = y[:50], y[50:]
+    m1, r1 = tune_random_forest(
+        X_train, y_train, X_val, y_val,
+        n_estimators=[10], max_depths=[3], min_samples_splits=[2], n_jobs=1,
+    )
+    m2, r2 = tune_random_forest(
+        X_train, y_train, X_val, y_val,
+        n_estimators=[10], max_depths=[3], min_samples_splits=[2], n_jobs=1,
+    )
+    assert m1.get_params()["max_depth"] == m2.get_params()["max_depth"]
+    assert r1[0]["val_metrics"]["accuracy"] == r2[0]["val_metrics"]["accuracy"]
+
+
+def test_tune_random_forest_empty_grid_raises(separable_features):
+    X, y = separable_features
+    X_train, X_val = X[:50], X[50:]
+    y_train, y_val = y[:50], y[50:]
+    with pytest.raises(ValueError):
+        tune_random_forest(
+            X_train, y_train, X_val, y_val,
+            n_estimators=[], max_depths=[3], min_samples_splits=[2],
+        )
+
+
+def test_default_rf_grids_exist():
+    assert DEFAULT_RF_N_ESTIMATORS
+    assert DEFAULT_RF_MAX_DEPTH
+    assert DEFAULT_RF_MIN_SAMPLES_SPLIT
+
+
+def test_save_random_forest_roundtrip(separable_features, tmp_path):
+    X, y = separable_features
+    model = train_random_forest(X, y, n_estimators=10, n_jobs=1)
+    path = save_model(model, tmp_path / "rf.joblib")
+    import joblib
+
+    loaded = joblib.load(path)
+    np.testing.assert_array_equal(model.predict(X), loaded.predict(X))

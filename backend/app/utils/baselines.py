@@ -6,6 +6,7 @@ from typing import Dict, List, Sequence
 
 import joblib
 import numpy as np
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
     accuracy_score,
@@ -24,6 +25,13 @@ REAL_LABEL = 1
 
 DEFAULT_LOGISTIC_PATH = "backend/ml/models/saved/logistic_regression.joblib"
 DEFAULT_NB_PATH = "backend/ml/models/saved/naive_bayes.joblib"
+
+DEFAULT_RF_N_ESTIMATORS = [100, 300]
+DEFAULT_RF_MAX_DEPTH = [None, 20]
+DEFAULT_RF_MIN_SAMPLES_SPLIT = [2, 5]
+DEFAULT_RF_MAX_FEATURES = "sqrt"
+DEFAULT_RF_N_JOBS = -1
+DEFAULT_RF_PATH = "backend/ml/models/saved/random_forest.joblib"
 
 
 def train_logistic_regression(
@@ -129,6 +137,72 @@ def tune_naive_bayes(
         raise ValueError("alphas must not be empty")
     models = [train_naive_bayes(X_train, y_train, alpha=a) for a in alphas]
     names = [{"alpha": a} for a in alphas]
+    return _tune(models, names, X_val, y_val)
+
+
+def train_random_forest(
+    X_train,
+    y_train: Sequence[int],
+    n_estimators: int = 100,
+    max_depth: int | None = None,
+    min_samples_split: int = 2,
+    max_features: str = DEFAULT_RF_MAX_FEATURES,
+    n_jobs: int = DEFAULT_RF_N_JOBS,
+    random_state: int = DEFAULT_RANDOM_STATE,
+) -> RandomForestClassifier:
+    model = RandomForestClassifier(
+        n_estimators=n_estimators,
+        max_depth=max_depth,
+        min_samples_split=min_samples_split,
+        max_features=max_features,
+        n_jobs=n_jobs,
+        random_state=random_state,
+    )
+    model.fit(X_train, y_train)
+    return model
+
+
+def tune_random_forest(
+    X_train,
+    y_train: Sequence[int],
+    X_val,
+    y_val: Sequence[int],
+    n_estimators: Sequence[int] = DEFAULT_RF_N_ESTIMATORS,
+    max_depths: Sequence[int | None] = DEFAULT_RF_MAX_DEPTH,
+    min_samples_splits: Sequence[int] = DEFAULT_RF_MIN_SAMPLES_SPLIT,
+    n_jobs: int = DEFAULT_RF_N_JOBS,
+    random_state: int = DEFAULT_RANDOM_STATE,
+) -> tuple[RandomForestClassifier, List[Dict[str, object]]]:
+    """Fit every grid combination on the training split, pick the best by validation macro F1."""
+    from itertools import product
+
+    if not n_estimators or not max_depths or not min_samples_splits:
+        raise ValueError("random forest grid lists must not be empty")
+
+    models = [
+        train_random_forest(
+            X_train,
+            y_train,
+            n_estimators=n_estimators_value,
+            max_depth=max_depth_value,
+            min_samples_split=min_samples_split_value,
+            n_jobs=n_jobs,
+            random_state=random_state,
+        )
+        for n_estimators_value, max_depth_value, min_samples_split_value in product(
+            n_estimators, max_depths, min_samples_splits
+        )
+    ]
+    names = [
+        {
+            "n_estimators": n_estimators_value,
+            "max_depth": max_depth_value,
+            "min_samples_split": min_samples_split_value,
+        }
+        for n_estimators_value, max_depth_value, min_samples_split_value in product(
+            n_estimators, max_depths, min_samples_splits
+        )
+    ]
     return _tune(models, names, X_val, y_val)
 
 

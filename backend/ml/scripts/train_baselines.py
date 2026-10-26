@@ -50,42 +50,40 @@ def load_dataset(data_dir: Path = DATA_DIR):
     return df, preprocessor
 
 
-def build_features(df, vectorizer_path):
-    """Fit the TF-IDF vectorizer on the train split and transform all splits."""
+def split_docs_labels(df):
+    """Slice cleaned titles/texts/labels into train/val/test docs via the split manifest."""
     split = load_splits(DEFAULT_SPLIT_PATH)
-    train_indices, val_indices, test_indices = split.subset(range(len(df)))
+    indices = split.subset(range(len(df)))
 
     title_list = df["title_clean"].tolist()
     text_list = df["text_clean"].tolist()
     labels = df["label"].tolist()
 
-    train_docs = combine_title_text(
-        [title_list[i] for i in train_indices],
-        [text_list[i] for i in train_indices],
-    )
-    val_docs = combine_title_text(
-        [title_list[i] for i in val_indices],
-        [text_list[i] for i in val_indices],
-    )
-    test_docs = combine_title_text(
-        [title_list[i] for i in test_indices],
-        [text_list[i] for i in test_indices],
-    )
+    docs: dict[str, list[str]] = {}
+    labels_split: dict[str, list[int]] = {}
+    for name, split_indices in zip(("train", "val", "test"), indices):
+        docs[name] = combine_title_text(
+            [title_list[i] for i in split_indices],
+            [text_list[i] for i in split_indices],
+        )
+        labels_split[name] = [labels[i] for i in split_indices]
+    return docs, labels_split
+
+
+def transform_splits(vectorizer, docs):
+    """Transform the per-split document lists into TF-IDF feature matrices."""
+    return {name: vectorizer.transform(doc_list) for name, doc_list in docs.items()}
+
+
+def build_features(df, vectorizer_path):
+    """Fit the TF-IDF vectorizer on the train split and transform all splits."""
+    docs, labels_split = split_docs_labels(df)
 
     vectorizer = TfidfVectorizerWrapper()
-    vectorizer.fit(train_docs)
+    vectorizer.fit(docs["train"])
     vectorizer.save(vectorizer_path)
 
-    features = {
-        "train": vectorizer.transform(train_docs),
-        "val": vectorizer.transform(val_docs),
-        "test": vectorizer.transform(test_docs),
-    }
-    labels_split = {
-        "train": [labels[i] for i in train_indices],
-        "val": [labels[i] for i in val_indices],
-        "test": [labels[i] for i in test_indices],
-    }
+    features = transform_splits(vectorizer, docs)
     return features, labels_split, vectorizer
 
 
