@@ -94,8 +94,8 @@ def test_single_class_labels_raise():
         stratified_split([1] * 100)
 
 
-def test_default_config_matches_plan():
-    """Confirm the PLAN.md Section 5 defaults (70/15/15, stratified)."""
+def test_default_config_matches_expected_ratios():
+    """Confirm the default split ratios (70% train, 15% validation, 15% test)."""
     labels = _make_labels(1000)
     split = stratified_split(labels)
     total = len(split)

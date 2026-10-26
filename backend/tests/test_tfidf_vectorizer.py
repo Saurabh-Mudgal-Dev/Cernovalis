@@ -119,8 +119,8 @@ def test_split_train_test_stratified(sample_docs, sample_labels):
     assert set(test_labels) == {0, 1}
 
 
-def test_default_config_matches_plan():
-    """Confirm PLAN.md Section 4.B defaults are applied."""
+def test_default_config_matches_expected_defaults():
+    """Confirm default vectorizer config: max_features=10000, (1,3) ngrams, sublinear TF."""
     vectorizer = TfidfVectorizerWrapper()
     assert vectorizer.max_features == 10000
     assert vectorizer.ngram_range == (1, 3)
