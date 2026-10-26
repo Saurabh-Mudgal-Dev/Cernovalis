@@ -28,6 +28,7 @@ backend/ml/models/saved/*.joblib
 !backend/ml/models/saved/.gitkeep
 backend/ml/models/vectorizers/*.joblib
 !backend/ml/models/vectorizers/.gitkeep
+backend/ml/data/processed/split_indices.json
 
 # OS / Editor
 .DS_Store
