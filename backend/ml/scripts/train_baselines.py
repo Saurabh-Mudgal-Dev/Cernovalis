@@ -75,6 +75,16 @@ def transform_splits(vectorizer, docs):
     return {name: vectorizer.transform(doc_list) for name, doc_list in docs.items()}
 
 
+def get_vectorizer(vectorizer_path, docs: dict[str, list[str]], force_fit: bool):
+    """Load the train-split TF-IDF vectorizer from disk, or fit and save a fresh one."""
+    if not force_fit and Path(vectorizer_path).exists():
+        return TfidfVectorizerWrapper.load(vectorizer_path), False
+    vectorizer = TfidfVectorizerWrapper()
+    vectorizer.fit(docs["train"])
+    vectorizer.save(vectorizer_path)
+    return vectorizer, True
+
+
 def build_features(df, vectorizer_path):
     """Fit the TF-IDF vectorizer on the train split and transform all splits."""
     docs, labels_split = split_docs_labels(df)

@@ -1,4 +1,4 @@
-"""Tests for the Logistic Regression and Naive Bayes baselines and the Random Forest."""
+"""Tests for the Logistic Regression, Naive Bayes, Random Forest and XGBoost models."""
 
 import numpy as np
 import pytest
@@ -10,14 +10,18 @@ from backend.app.utils.baselines import (
     DEFAULT_RF_MAX_DEPTH,
     DEFAULT_RF_MIN_SAMPLES_SPLIT,
     DEFAULT_RF_N_ESTIMATORS,
+    DEFAULT_XGB_MAX_DEPTH,
+    DEFAULT_XGB_N_ESTIMATORS,
     evaluate_model,
     save_model,
     train_logistic_regression,
     train_naive_bayes,
     train_random_forest,
+    train_xgboost,
     tune_logistic_regression,
     tune_naive_bayes,
     tune_random_forest,
+    tune_xgboost,
 )
 from backend.app.utils.dataset_split import stratified_split
 
@@ -222,6 +226,97 @@ def test_save_random_forest_roundtrip(separable_features, tmp_path):
     X, y = separable_features
     model = train_random_forest(X, y, n_estimators=10, n_jobs=1)
     path = save_model(model, tmp_path / "rf.joblib")
+    import joblib
+
+    loaded = joblib.load(path)
+    np.testing.assert_array_equal(model.predict(X), loaded.predict(X))
+
+
+def test_train_xgboost_default_params(separable_features):
+    X, y = separable_features
+    model = train_xgboost(X, y, n_estimators=10, n_jobs=1)
+    assert model.n_estimators == 10
+    predictions = model.predict(X)
+    assert len(predictions) == len(y)
+    assert set(np.unique(predictions)) <= {0, 1}
+
+
+def test_train_xgboost_reproducible(separable_features):
+    X, y = separable_features
+    model = train_xgboost(X, y, n_estimators=10, random_state=42, n_jobs=1)
+    clone = train_xgboost(X, y, n_estimators=10, random_state=42, n_jobs=1)
+    np.testing.assert_array_equal(model.predict(X), clone.predict(X))
+
+
+def test_tune_xgboost_picks_grid_member(separable_features):
+    X, y = separable_features
+    X_train, X_val = X[:50], X[50:]
+    y_train, y_val = y[:50], y[50:]
+    model, results = tune_xgboost(
+        X_train, y_train, X_val, y_val,
+        n_estimators=[10],
+        max_depths=[2, 3],
+        learning_rates=[0.1],
+        n_jobs=1,
+    )
+    assert len(results) == 2
+    assert set(r["params"]["max_depth"] for r in results) == {2, 3}
+    assert model.get_params()["max_depth"] in {2, 3}
+    assert model.get_params()["n_estimators"] == 10
+    for r in results:
+        assert r["val_metrics"]["n_samples"] == len(y_val)
+
+
+def test_tune_xgboost_grid_size(separable_features):
+    X, y = separable_features
+    X_train, X_val = X[:50], X[50:]
+    y_train, y_val = y[:50], y[50:]
+    _, results = tune_xgboost(
+        X_train, y_train, X_val, y_val,
+        n_estimators=[10],
+        max_depths=[2, 3],
+        learning_rates=[0.1, 0.5],
+        n_jobs=1,
+    )
+    assert len(results) == 4
+
+
+def test_tune_xgboost_is_deterministic(separable_features):
+    X, y = separable_features
+    X_train, X_val = X[:50], X[50:]
+    y_train, y_val = y[:50], y[50:]
+    m1, r1 = tune_xgboost(
+        X_train, y_train, X_val, y_val,
+        n_estimators=[10], max_depths=[2], learning_rates=[0.1], n_jobs=1,
+    )
+    m2, r2 = tune_xgboost(
+        X_train, y_train, X_val, y_val,
+        n_estimators=[10], max_depths=[2], learning_rates=[0.1], n_jobs=1,
+    )
+    assert m1.get_params()["max_depth"] == m2.get_params()["max_depth"]
+    assert r1[0]["val_metrics"]["accuracy"] == r2[0]["val_metrics"]["accuracy"]
+
+
+def test_tune_xgboost_empty_grid_raises(separable_features):
+    X, y = separable_features
+    X_train, X_val = X[:50], X[50:]
+    y_train, y_val = y[:50], y[50:]
+    with pytest.raises(ValueError):
+        tune_xgboost(
+            X_train, y_train, X_val, y_val,
+            n_estimators=[], max_depths=[3], learning_rates=[0.1],
+        )
+
+
+def test_default_xgb_grids_exist():
+    assert DEFAULT_XGB_N_ESTIMATORS
+    assert DEFAULT_XGB_MAX_DEPTH
+
+
+def test_save_xgboost_roundtrip(separable_features, tmp_path):
+    X, y = separable_features
+    model = train_xgboost(X, y, n_estimators=10, n_jobs=1)
+    path = save_model(model, tmp_path / "xgb.joblib")
     import joblib
 
     loaded = joblib.load(path)

@@ -24,9 +24,9 @@ from backend.app.utils.baselines import (  # noqa: E402
 from backend.app.utils.dataset_split import DEFAULT_SPLIT_PATH  # noqa: E402
 from backend.app.utils.tfidf_vectorizer import (  # noqa: E402
     DEFAULT_VECTORIZER_PATH,
-    TfidfVectorizerWrapper,
 )
 from backend.ml.scripts.train_baselines import (  # noqa: E402
+    get_vectorizer,
     load_dataset,
     split_docs_labels,
     transform_splits,
@@ -38,16 +38,6 @@ RF_REPORT_PATH = Path("backend/ml/models/saved/random_forest_report.json")
 def parse_depth(value: str) -> int | None:
     """Accept 'none' as an unlimited-depth sentinel for CLI overrides."""
     return None if value.lower() in ("none", "null") else int(value)
-
-
-def get_vectorizer(vectorizer_path: Path, docs: dict[str, list[str]], force_fit: bool):
-    """Load the train-split vectorizer from disk, or fit and save a fresh one."""
-    if not force_fit and vectorizer_path.exists():
-        return TfidfVectorizerWrapper.load(vectorizer_path), False
-    vectorizer = TfidfVectorizerWrapper()
-    vectorizer.fit(docs["train"])
-    vectorizer.save(vectorizer_path)
-    return vectorizer, True
 
 
 def main() -> None:
