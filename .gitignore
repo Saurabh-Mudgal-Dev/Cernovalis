@@ -25,9 +25,16 @@ backend/ml/data/raw/*.csv
 backend/ml/data/processed/*.csv
 !backend/ml/data/processed/.gitkeep
 backend/ml/models/saved/*.joblib
+backend/ml/models/saved/*.keras
+backend/ml/models/saved/*.npz
 !backend/ml/models/saved/.gitkeep
 backend/ml/models/vectorizers/*.joblib
 !backend/ml/models/vectorizers/.gitkeep
+
+# Export bundles: reports (JSON) and manifest stay tracked, binaries stay out
+backend/ml/export/**/*.joblib
+backend/ml/export/**/*.keras
+backend/ml/export/**/*.npz
 backend/ml/data/processed/split_indices.json
 
 # OS / Editor
