@@ -1,5 +1,5 @@
 """Configurable text preprocessor orchestrating cleaning, tokenization,
-stopword removal, and optional spaCy lemmatization.
+stopword removal, and spaCy lemmatization.
 """
 
 from __future__ import annotations

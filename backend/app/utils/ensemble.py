@@ -36,7 +36,6 @@ def get_probabilities(model, X, verbose: int = 0) -> np.ndarray:
 def soft_vote(
     probabilities: Mapping[str, np.ndarray],
     weights: Mapping[str, float] | None = None,
-    threshold: float = DEFAULT_THRESHOLD,
 ) -> np.ndarray:
     """Weighted-average per-model probabilities into a single probability vector."""
     if not probabilities:

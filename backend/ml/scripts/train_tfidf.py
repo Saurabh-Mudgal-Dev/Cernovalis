@@ -1,8 +1,4 @@
-"""Train and persist the TF-IDF vectorizer on cleaned article titles + content.
-
-Run from the repository root:
-    python backend/ml/scripts/train_tfidf.py
-"""
+"""Train and persist the TF-IDF vectorizer on cleaned article titles + content."""
 
 from __future__ import annotations
 

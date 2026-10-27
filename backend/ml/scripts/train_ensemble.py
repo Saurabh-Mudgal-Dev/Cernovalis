@@ -160,7 +160,6 @@ def main() -> None:
     }
     print("\nsoft voting on the test split:")
     for config_name, weights in vote_configs.items():
-        used_weights = weights
         effective = weights or {name: 1.0 for name in val_probs}
         val_metrics = evaluate_probabilities(y_val, soft_vote(val_probs, effective))
         test_metrics = evaluate_probabilities(y_test, soft_vote(test_probs, effective))
@@ -195,9 +194,6 @@ def main() -> None:
         name: float(coef) for name, coef in zip(val_probs, model_importance)
     }
 
-    best_vote = max(
-        voting.values(), key=lambda entry: entry["test_metrics"]["macro_f1"]
-    )
     best_meta = meta_report["test_metrics"]["macro_f1"]
     final_name, final_entry = max(
         voting.items(), key=lambda kv: kv[1]["test_metrics"]["macro_f1"]

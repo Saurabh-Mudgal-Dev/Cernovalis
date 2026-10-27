@@ -1,9 +1,5 @@
 """Tests for the feature scaler."""
 
-from pathlib import Path
-import tempfile
-
-import joblib
 import numpy as np
 import pytest
 from sklearn.preprocessing import StandardScaler

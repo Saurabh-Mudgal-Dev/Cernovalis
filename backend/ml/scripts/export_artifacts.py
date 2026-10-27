@@ -12,14 +12,12 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from backend.app.utils.exporter import (  # noqa: E402
-    DEFAULT_EXPORT_ROOT,
     default_timestamp_dir,
     export_bundle,
     source_map,
     verify_bundle,
 )
 from backend.app.utils.bilstm import (  # noqa: E402
-    DEFAULT_MAX_LEN,
     DEFAULT_MAX_VOCAB,
 )
 from backend.ml.scripts.train_baselines import load_dataset, split_docs_labels  # noqa: E402

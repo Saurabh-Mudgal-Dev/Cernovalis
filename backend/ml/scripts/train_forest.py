@@ -21,7 +21,6 @@ from backend.app.utils.baselines import (  # noqa: E402
     evaluate_model,
     tune_random_forest,
 )
-from backend.app.utils.dataset_split import DEFAULT_SPLIT_PATH  # noqa: E402
 from backend.app.utils.tfidf_vectorizer import (  # noqa: E402
     DEFAULT_VECTORIZER_PATH,
 )

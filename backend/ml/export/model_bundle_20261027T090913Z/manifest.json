@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-10-27T05:17:01.432237+00:00",
+  "exported_at": "2026-10-27T09:09:14.109310+00:00",
   "versions": {
     "python": "3.13.5",
     "platform": "Windows-11-10.0.26200-SP0",
@@ -12,13 +12,13 @@
   "artifacts": {
     "logistic_regression": {
       "filename": "logistic_regression.joblib",
-      "sha256": "2fd2aa5a2126512f0f661adc7c9f6deeabe82f4eb44735e0943a12a311138a3c",
-      "size_bytes": 80891,
+      "sha256": "3bf1f087bf52ca3d8be42d85b0201943d8ac6bf5f920a671791672cc40024e62",
+      "size_bytes": 80875,
       "source": "backend\\ml\\models\\saved\\logistic_regression.joblib"
     },
     "naive_bayes": {
       "filename": "naive_bayes.joblib",
-      "sha256": "7f0f929292418259efcc553642047c6a139f38c6aadc52616f06001b85899ac9",
+      "sha256": "517d3e12f7bb7dc60f94f3c7ae6d8d9e0c432761e140cd567759d9e363268189",
       "size_bytes": 320791,
       "source": "backend\\ml\\models\\saved\\naive_bayes.joblib"
     },
@@ -34,17 +34,41 @@
       "size_bytes": 999797,
       "source": "backend\\ml\\models\\saved\\xgboost_model.joblib"
     },
+    "bilstm_model": {
+      "filename": "bilstm_model.keras",
+      "sha256": "bb58475a52620214585b373df10672808bb66f06f59dfcc660864946e7061624",
+      "size_bytes": 118373633,
+      "source": "backend\\ml\\models\\saved\\bilstm_model.keras"
+    },
+    "bilstm_tokenizer": {
+      "filename": "bilstm_tokenizer.json",
+      "sha256": "d7d890144ef3ce597c8386a69067b38a8a2e05173feb1ee7bca3802b29f920e4",
+      "size_bytes": 912178,
+      "source": "backend\\ml\\models\\saved\\bilstm_tokenizer.json"
+    },
+    "meta_classifier": {
+      "filename": "meta_classifier.joblib",
+      "sha256": "99ac514d6ce273a321d754653b15830ae19b52fb31dcf08a7477573dfb60baa9",
+      "size_bytes": 923,
+      "source": "backend\\ml\\models\\saved\\meta_classifier.joblib"
+    },
     "tfidf_vectorizer": {
       "filename": "tfidf_vectorizer.joblib",
-      "sha256": "df93f76e7c7be66434aeb4e4b9403e8176ca2637251fcdd9cacc2af1a376fff9",
-      "size_bytes": 3677,
+      "sha256": "40b89703b43b23f1c2706d56bb0ae6ea534289e8423196ecf38c26061c2bf8ca",
+      "size_bytes": 390242,
       "source": "backend\\ml\\models\\vectorizers\\tfidf_vectorizer.joblib"
     },
     "feature_scaler": {
       "filename": "feature_scaler.joblib",
-      "sha256": "ab6df5da8da514abfc09a62f436c9cfa2c7218451531667ddb5024f54b636c7d",
+      "sha256": "080e9977d3e1632ea78c8dc14bc1ec84b7ace004c493195380c50d7adbc5f10c",
       "size_bytes": 1119,
       "source": "backend\\ml\\models\\vectorizers\\feature_scaler.joblib"
+    },
+    "feature_pipeline": {
+      "filename": "feature_pipeline.joblib",
+      "sha256": "829cec62254c70332ced6c5a939283cff4bcb7284210fbcd3ce9d1aadcba2c60",
+      "size_bytes": 391992,
+      "source": "backend\\ml\\models\\saved\\feature_pipeline.joblib"
     },
     "baseline_report": {
       "filename": "baseline_report.json",
@@ -64,6 +88,18 @@
       "size_bytes": 8359,
       "source": "backend\\ml\\models\\saved\\xgboost_report.json"
     },
+    "bilstm_report": {
+      "filename": "bilstm_report.json",
+      "sha256": "03a3ce243f396bcd92b31885a9377a3368dff78b40fd9b1a64b8c0ab333de210",
+      "size_bytes": 5001,
+      "source": "backend\\ml\\models\\saved\\bilstm_report.json"
+    },
+    "ensemble_report": {
+      "filename": "ensemble_report.json",
+      "sha256": "1a034767de33c638a29faca336d75d6edd3e02aa5e97c03ece9f2b3d08d49bdb",
+      "size_bytes": 6037,
+      "source": "backend\\ml\\models\\saved\\ensemble_report.json"
+    },
     "split_manifest": {
       "filename": "split_indices.json",
       "sha256": "03f838fb000c25165c9ea302dfc21fde0325cc65f0c0281eadebf3d461fdd4fe",
@@ -73,5 +109,5 @@
   },
   "missing": [],
   "complete": true,
-  "artifact_count": 10
+  "artifact_count": 16
 }

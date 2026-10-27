@@ -1,9 +1,4 @@
-"""Train and persist the unified feature pipeline (TF-IDF + stylometric features).
-
-Run from the repository root:
-
-    python backend/ml/scripts/train_features.py
-"""
+"""Train and persist the unified feature pipeline (TF-IDF + stylometric features)."""
 
 from __future__ import annotations
 
@@ -62,7 +57,6 @@ def train_pipeline(
 
     titles = df["title_clean"].tolist()
     texts = df["text_clean"].tolist()
-    labels = df["label"].tolist()
 
     pipeline = FeaturePipeline()
     pipeline.fit(titles, texts)
