@@ -1,0 +1,77 @@
+{
+  "exported_at": "2026-10-27T05:17:01.432237+00:00",
+  "versions": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "sklearn": "1.9.1",
+    "xgboost": "3.4.1",
+    "joblib": "1.6.0",
+    "numpy": "2.5.4",
+    "keras": "3.15.1"
+  },
+  "artifacts": {
+    "logistic_regression": {
+      "filename": "logistic_regression.joblib",
+      "sha256": "2fd2aa5a2126512f0f661adc7c9f6deeabe82f4eb44735e0943a12a311138a3c",
+      "size_bytes": 80891,
+      "source": "backend\\ml\\models\\saved\\logistic_regression.joblib"
+    },
+    "naive_bayes": {
+      "filename": "naive_bayes.joblib",
+      "sha256": "7f0f929292418259efcc553642047c6a139f38c6aadc52616f06001b85899ac9",
+      "size_bytes": 320791,
+      "source": "backend\\ml\\models\\saved\\naive_bayes.joblib"
+    },
+    "random_forest": {
+      "filename": "random_forest.joblib",
+      "sha256": "05bb1ac254985ea5ca722b01ff91483c1aabbfb401e65255dd17c32b22f55814",
+      "size_bytes": 100342713,
+      "source": "backend\\ml\\models\\saved\\random_forest.joblib"
+    },
+    "xgboost": {
+      "filename": "xgboost_model.joblib",
+      "sha256": "52064eb84bf6412d249991a322e1172cb02854234ad9051b5f6760b182a27c46",
+      "size_bytes": 999797,
+      "source": "backend\\ml\\models\\saved\\xgboost_model.joblib"
+    },
+    "tfidf_vectorizer": {
+      "filename": "tfidf_vectorizer.joblib",
+      "sha256": "df93f76e7c7be66434aeb4e4b9403e8176ca2637251fcdd9cacc2af1a376fff9",
+      "size_bytes": 3677,
+      "source": "backend\\ml\\models\\vectorizers\\tfidf_vectorizer.joblib"
+    },
+    "feature_scaler": {
+      "filename": "feature_scaler.joblib",
+      "sha256": "ab6df5da8da514abfc09a62f436c9cfa2c7218451531667ddb5024f54b636c7d",
+      "size_bytes": 1119,
+      "source": "backend\\ml\\models\\vectorizers\\feature_scaler.joblib"
+    },
+    "baseline_report": {
+      "filename": "baseline_report.json",
+      "sha256": "1644e6c07930ece532bfb89359d1a8a9185bb3022619f2dae895fc921b8ab0d4",
+      "size_bytes": 7488,
+      "source": "backend\\ml\\models\\saved\\baseline_report.json"
+    },
+    "random_forest_report": {
+      "filename": "random_forest_report.json",
+      "sha256": "00bf2cdc459afe000b9fbd41f063946e3f90b8e58a24debb97e690949f41c094",
+      "size_bytes": 8381,
+      "source": "backend\\ml\\models\\saved\\random_forest_report.json"
+    },
+    "xgboost_report": {
+      "filename": "xgboost_report.json",
+      "sha256": "b21cf6d15642085b2dd86aa7da68de57fc5738543fb88225409a5103ac76fa4d",
+      "size_bytes": 8359,
+      "source": "backend\\ml\\models\\saved\\xgboost_report.json"
+    },
+    "split_manifest": {
+      "filename": "split_indices.json",
+      "sha256": "03f838fb000c25165c9ea302dfc21fde0325cc65f0c0281eadebf3d461fdd4fe",
+      "size_bytes": 303469,
+      "source": "backend\\ml\\data\\processed\\split_indices.json"
+    }
+  },
+  "missing": [],
+  "complete": true,
+  "artifact_count": 10
+}
