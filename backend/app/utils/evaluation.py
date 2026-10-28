@@ -133,6 +133,7 @@ def _save_figure(fig, path: Path | str) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path, dpi=150, bbox_inches="tight")
+    _pyplot().close(fig)
     return path
 
 

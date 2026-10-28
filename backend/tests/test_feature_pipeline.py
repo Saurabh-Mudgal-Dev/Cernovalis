@@ -55,7 +55,11 @@ def test_pipeline_save_and_load(tmp_path, sample_titles, sample_texts):
     pipeline = FeaturePipeline(max_features=1000)
     pipeline.fit(sample_titles, sample_texts)
     save_path = tmp_path / "pipeline.joblib"
-    pipeline.save(save_path)
+    pipeline.save(
+        save_path,
+        tmp_path / "tfidf_vectorizer.joblib",
+        tmp_path / "feature_scaler.joblib",
+    )
     assert save_path.exists()
 
     loaded = FeaturePipeline.load(save_path)
@@ -108,7 +112,11 @@ def test_pipeline_joblib_roundtrip_preserves_config(tmp_path, sample_titles, sam
     pipeline = FeaturePipeline(max_features=500, ngram_range=(1, 2), sublinear_tf=False)
     pipeline.fit(sample_titles, sample_texts)
     path = tmp_path / "pipeline.joblib"
-    pipeline.save(path)
+    pipeline.save(
+        path,
+        tmp_path / "tfidf_vectorizer.joblib",
+        tmp_path / "feature_scaler.joblib",
+    )
     loaded = FeaturePipeline.load(path)
     assert loaded.tfidf.max_features == 500
     assert loaded.tfidf.ngram_range == (1, 2)

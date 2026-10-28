@@ -1,11 +1,4 @@
-"""Generate confusion matrices, ROC-AUC, precision-recall curves and feature importance.
-
-Run from the repository root:
-    python backend/ml/scripts/evaluate_models.py
-
-Scores every trained model on the held-out test split, writes a JSON report
-next to the training reports and renders the corresponding figures.
-"""
+"""Generate confusion matrices, ROC-AUC, precision-recall curves and feature importance."""
 
 from __future__ import annotations
 
