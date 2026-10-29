@@ -3,14 +3,10 @@
 from fastapi import APIRouter, HTTPException, Request
 
 from backend.app.schemas import (
-    AnalysisExplanation,
     AnalyzeRequest,
     AnalyzeResponse,
-    InputType,
-    SourceCredibility,
-    Verdict,
 )
-from backend.app.services.explainer import build_explanation, risk_level_for
+from backend.app.services.analysis import analyze_text
 
 router = APIRouter(prefix="/api/v1", tags=["analysis"])
 
@@ -35,17 +31,6 @@ async def analyze_article(payload: AnalyzeRequest, request: Request) -> AnalyzeR
 
     predictor = _get_predictor(request)
     try:
-        prediction = predictor.predict(text=payload.text)
+        return analyze_text(predictor, payload.text)
     except ValueError as error:
         raise HTTPException(status_code=422, detail=str(error)) from error
-
-    explanation = build_explanation(payload.text, prediction, predictor.artifacts)
-    return AnalyzeResponse(
-        input_type=InputType.text,
-        original_input=payload.text,
-        verdict=Verdict(prediction.verdict),
-        confidence=prediction.confidence,
-        risk_level=risk_level_for(prediction.verdict, prediction.confidence),
-        source_credibility=SourceCredibility(),
-        explanation=AnalysisExplanation(**explanation),
-    )

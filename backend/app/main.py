@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse
 from loguru import logger
 
 from backend.app.api.routes.analyze import router as analyze_router
+from backend.app.api.routes.batch import router as batch_router
 from backend.app.config import get_settings
 from backend.app.services.predictor import ArtifactStatus, PredictorService, load_predictor
 
@@ -58,6 +59,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(analyze_router)
+app.include_router(batch_router)
 
 
 @app.exception_handler(Exception)
