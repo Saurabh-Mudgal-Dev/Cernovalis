@@ -9,6 +9,14 @@ from fastapi.responses import JSONResponse
 from loguru import logger
 
 from backend.app.config import get_settings
+from backend.app.services.predictor import ArtifactStatus, PredictorService, load_predictor
+
+
+def _load_predictor(
+    settings,
+) -> tuple[PredictorService, list[ArtifactStatus]]:
+    """Indirection so tests can stub artifact loading."""
+    return load_predictor(settings)
 
 
 @asynccontextmanager
@@ -17,6 +25,16 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     settings = get_settings()
     app.state.settings = settings
     logger.info("Starting {}", settings.app_name)
+    try:
+        predictor, statuses = _load_predictor(settings)
+        app.state.predictor = predictor
+        app.state.model_status = statuses
+        loaded = sum(1 for status in statuses if status.loaded)
+        logger.info("Model artifacts loaded: {}/{}", loaded, len(statuses))
+    except Exception as error:  # startup must not fail over a broken artifact
+        logger.exception("Predictor could not be loaded: {}", error)
+        app.state.predictor = None
+        app.state.model_status = []
     try:
         yield
     finally:

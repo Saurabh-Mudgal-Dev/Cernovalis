@@ -1,6 +1,7 @@
 """Application settings loaded from environment variables and .env."""
 
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -15,6 +16,8 @@ class Settings(BaseSettings):
         "http://localhost:4173",
         "http://127.0.0.1:4173",
     ]
+    model_dir: Path = Path("backend/ml/models/saved")
+    vectorizer_path: Path = Path("backend/ml/models/vectorizers/tfidf_vectorizer.joblib")
 
     model_config = SettingsConfigDict(
         env_file=".env",

@@ -18,7 +18,11 @@ def test_settings_read_environment_values(monkeypatch):
     assert settings.cors_origins == ["https://ui.example"]
 
 
-def test_health_and_lifespan():
+def test_health_and_lifespan(monkeypatch):
+    monkeypatch.setattr(
+        "backend.app.main._load_predictor",
+        lambda settings: (None, []),
+    )
     with TestClient(app) as client:
         response = client.get("/health")
 
@@ -27,7 +31,11 @@ def test_health_and_lifespan():
         assert app.state.settings.app_name == app.title
 
 
-def test_cors_preflight_for_frontend_origin():
+def test_cors_preflight_for_frontend_origin(monkeypatch):
+    monkeypatch.setattr(
+        "backend.app.main._load_predictor",
+        lambda settings: (None, []),
+    )
     with TestClient(app) as client:
         response = client.options(
             "/health",
