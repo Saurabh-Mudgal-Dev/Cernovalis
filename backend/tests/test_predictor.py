@@ -7,7 +7,6 @@ import numpy as np
 import pytest
 
 from backend.app.services.predictor import (
-    ArtifactStatus,
     EnsembleArtifacts,
     PredictorNotReadyError,
     PredictorService,

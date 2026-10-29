@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from loguru import logger
 
+from backend.app.api.routes.analyze import router as analyze_router
 from backend.app.config import get_settings
 from backend.app.services.predictor import ArtifactStatus, PredictorService, load_predictor
 
@@ -56,6 +57,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(analyze_router)
 
 
 @app.exception_handler(Exception)
