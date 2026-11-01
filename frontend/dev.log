@@ -1,0 +1,246 @@
+
+> cernovalis-frontend@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.28
+   - Local:        http://localhost:53779
+   - Network:      http://172.18.48.1:53779
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 6.8s
+ ○ Compiling / ...
+ ✓ Compiled / in 17.1s (1487 modules)
+ GET / 200 in 13104ms
+ GET / 200 in 197ms
+ GET / 200 in 158ms
+ GET / 200 in 151ms
+ ○ Compiling /detect ...
+ ✓ Compiled /detect in 4.1s (1756 modules)
+ GET /detect 200 in 5648ms
+ GET / 200 in 1672ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 7.7s (2741 modules)
+ GET /dashboard 200 in 9583ms
+ ○ Compiling /model-comparison ...
+ ✓ Compiled /model-comparison in 1616ms (2774 modules)
+ GET /model-comparison 200 in 2722ms
+ ○ Compiling /analytics ...
+ ✓ Compiled /analytics in 6.1s (2813 modules)
+ GET /analytics 200 in 7187ms
+ ○ Compiling /history ...
+ ✓ Compiled /history in 1317ms (2824 modules)
+ GET /history 200 in 1910ms
+ ○ Compiling /settings ...
+ ✓ Compiled /settings in 1253ms (2835 modules)
+ GET /settings 200 in 1882ms
+ GET /detect 200 in 169ms
+Failed to proxy http://localhost:8000/api/health [AggregateError: ] { code: 'ECONNREFUSED' }
+[AggregateError: ] { code: 'ECONNREFUSED' }
+Failed to proxy http://localhost:8000/api/health [AggregateError: ] { code: 'ECONNREFUSED' }
+[AggregateError: ] { code: 'ECONNREFUSED' }
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 6.6s (2644 modules)
+ ✓ Compiled in 5.1s (2559 modules)
+ ✓ Compiled in 1193ms (2559 modules)
+ ✓ Compiled in 3.3s (2559 modules)
+ ✓ Compiled in 3.8s (2559 modules)
+ ✓ Compiled in 1211ms (2561 modules)
+ GET / 200 in 1267ms
+ GET /detect 200 in 516ms
+ ⚠ ./app/page.tsx
+Attempted import error: 'useTypewriter' is not exported from '@/components/HeroTypewriter' (imported as 'useTypewriter').
+
+Import trace for requested module:
+./app/page.tsx
+
+./app/page.tsx
+Attempted import error: 'useTypewriter' is not exported from '@/components/HeroTypewriter' (imported as 'useTypewriter').
+
+Import trace for requested module:
+./app/page.tsx
+
+./app/page.tsx
+Attempted import error: 'useTypewriter' is not exported from '@/components/HeroTypewriter' (imported as 'useTypewriter').
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected '</', got 'jsx text (
+  [31m|[0m         )'
+     ,-[[36;1;4mC:\Users\HP\Documents\Cernovalis\frontend\app\page.tsx[0m:106:1]
+ [2m103[0m |                     </div>
+ [2m104[0m |                   </div>
+ [2m105[0m |                 ))}
+ [2m106[0m | [35;1m,[0m[35;1m-[0m[35;1m>[0m           </motion.div>
+ [2m107[0m | [35;1m`[0m[35;1m-[0m[35;1m>[0m         </div>
+ [2m108[0m |     
+ [2m109[0m |             <motion.div
+ [2m110[0m |               initial={{ opacity: 0, scale: 0.94 }}
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ✓ Compiled in 1267ms (2561 modules)
+ ✓ Compiled in 756ms (1462 modules)
+ ✓ Compiled in 660ms (1462 modules)
+ ✓ Compiled in 1083ms (2561 modules)
+ ⨯ ./app/(app)/model-comparison/page.tsx
+Error:   [31mx[0m Expected ',', got ':'
+    ,-[[36;1;4mC:\Users\HP\Documents\Cernovalis\frontend\app\(app)\model-comparison\page.tsx[0m:91:1]
+ [2m88[0m | 
+ [2m89[0m |   const M = Math.ceil(curves[0].data.length)
+ [2m90[0m |   const mergedRoc = (() => {
+ [2m91[0m |     rows: { [k: string]: number }[] = []
+    : [35;1m              ^[0m
+ [2m92[0m |     const rows: { fpr: number; lr: number; xgb: number; bilstm: number; random: number }[] = []
+ [2m93[0m |     for (let i = 0; i < M; i++) {
+ [2m94[0m |       rows.push({
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/(app)/model-comparison/page.tsx
+ ✓ Compiled in 688ms (1462 modules)
+ ✓ Compiled in 832ms (1462 modules)
+ ✓ Compiled in 920ms (1462 modules)
+ GET / 200 in 899ms
+ ○ Compiling /model-comparison ...
+ ✓ Compiled /model-comparison in 5.8s (1590 modules)
+ GET /model-comparison 200 in 7127ms
+ ✓ Compiled in 2.3s (2561 modules)
+ ⨯ ./components/DisclaimerBanner.tsx
+Error: 
+
+Caused by:
+    0: Failed to read source code from C:\Users\HP\Documents\Cernovalis\frontend\components\DisclaimerBanner.tsx
+    1: The system cannot find the file specified. (os error 2)
+
+Import trace for requested module:
+./components/DisclaimerBanner.tsx
+./app/(app)/detect/page.tsx
+ ⨯ ./components/DisclaimerBanner.tsx
+Error: 
+
+Caused by:
+    0: Failed to read source code from C:\Users\HP\Documents\Cernovalis\frontend\components\DisclaimerBanner.tsx
+    1: The system cannot find the file specified. (os error 2)
+
+Import trace for requested module:
+./components/DisclaimerBanner.tsx
+./app/(app)/dashboard/page.tsx
+ ⨯ ./components/DisclaimerBanner.tsx
+Error: 
+
+Caused by:
+    0: Failed to read source code from C:\Users\HP\Documents\Cernovalis\frontend\components\DisclaimerBanner.tsx
+    1: The system cannot find the file specified. (os error 2)
+
+Import trace for requested module:
+./components/DisclaimerBanner.tsx
+./app/(app)/dashboard/page.tsx
+ ⨯ ./components/DisclaimerBanner.tsx
+Error: 
+
+Caused by:
+    0: Failed to read source code from C:\Users\HP\Documents\Cernovalis\frontend\components\DisclaimerBanner.tsx
+    1: The system cannot find the file specified. (os error 2)
+
+Import trace for requested module:
+./components/DisclaimerBanner.tsx
+./app/(app)/dashboard/page.tsx
+ ⨯ ./components/DisclaimerBanner.tsx
+Error: 
+
+Caused by:
+    0: Failed to read source code from C:\Users\HP\Documents\Cernovalis\frontend\components\DisclaimerBanner.tsx
+    1: The system cannot find the file specified. (os error 2)
+
+Import trace for requested module:
+./components/DisclaimerBanner.tsx
+./app/(app)/dashboard/page.tsx
+ ✓ Compiled in 742ms (1459 modules)
+ ✓ Compiled in 882ms (1459 modules)
+ ✓ Compiled in 1935ms (2555 modules)
+ ✓ Compiled in 4.1s (2567 modules)
+ ✓ Compiled in 664ms (1461 modules)
+ GET / 200 in 1298ms
+ GET /detect 200 in 541ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 3.5s (1598 modules)
+ GET /dashboard 200 in 4900ms
+ ○ Compiling /model-comparison ...
+ ✓ Compiled /model-comparison in 1231ms (1616 modules)
+ GET /model-comparison 200 in 2268ms
+ ○ Compiling /analytics ...
+ ✓ Compiled /analytics in 1113ms (1637 modules)
+ GET /analytics 200 in 1984ms
+ ○ Compiling /history ...
+ ✓ Compiled /history in 893ms (1644 modules)
+ GET /history 200 in 1554ms
+ ○ Compiling /settings ...
+ ✓ Compiled /settings in 909ms (1651 modules)
+ GET /settings 200 in 1479ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\HP\Documents\Cernovalis\frontend\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\HP\Documents\Cernovalis\frontend\.next\cache\webpack\client-development\0.pack.gz'
+ ✓ Compiled in 2.1s (2558 modules)
+ GET /detect 200 in 1141ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\HP\Documents\Cernovalis\frontend\.next\cache\webpack\server-development\7.pack.gz_' -> 'C:\Users\HP\Documents\Cernovalis\frontend\.next\cache\webpack\server-development\7.pack.gz'
+ ✓ Compiled in 2.3s (2558 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled in 1670ms (2558 modules)
+ GET /detect 200 in 2445ms
+ GET /detect 200 in 2410ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled in 2.2s (2558 modules)
+ GET /detect 200 in 1125ms
+ GET /detect 200 in 2077ms
+ GET /detect 200 in 292ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'C:\Users\HP\Documents\Cernovalis\frontend\.next\cache\webpack\server-development\8.pack.gz_' -> 'C:\Users\HP\Documents\Cernovalis\frontend\.next\cache\webpack\server-development\8.pack.gz'
+Failed to proxy http://localhost:8000/health [AggregateError: ] { code: 'ECONNREFUSED' }
+[AggregateError: ] { code: 'ECONNREFUSED' }
+ ○ Compiling /_error ...
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled /_error in 1815ms (2645 modules)
+ GET /detect 200 in 3003ms
+Failed to proxy http://localhost:8000/health [AggregateError: ] { code: 'ECONNREFUSED' }
+[AggregateError: ] { code: 'ECONNREFUSED' }
+ ⨯ ./app/globals.css:19:20
+Syntax error: C:\Users\HP\Documents\Cernovalis\frontend\app\globals.css Unclosed bracket
+
+ [90m 17 | [39m    [36mradial-gradient[39m[36m([39m1200px 800px at 85% -10%, [36mrgba[39m[36m(150, 185, 232, 0.1)[39m, transparent 60%[36m)[39m,
+ [90m 18 | [39m    [36mradial-gradient[39m[36m([39m1000px 700px at -10% 110%, [36mrgba[39m[36m(115, 145, 200, 0.08)[39m, transparent 60%[36m)[39m,
+[1m[31m>[39m[22m[90m 19 | [39m    [36mradial-gradient[39m[36m([39m800px 560px at 55% 42%, [36mrgba[39m[36m(135, 162, 212, 0.05, transparent 70%)[39m[33m;[39m
+ [90m    | [39m                   [1m[31m^[39m[22m
+ [90m 20 | [39m  color[33m:[39m [35m#ededf0[39m[33m;[39m
+ [90m 21 | [39m[33m}[39m
+ ○ Compiling /_error ...
+ ⨯ ./app/globals.css:19:20
+Syntax error: C:\Users\HP\Documents\Cernovalis\frontend\app\globals.css Unclosed bracket
+
+ [90m 17 | [39m    [36mradial-gradient[39m[36m([39m1200px 800px at 85% -10%, [36mrgba[39m[36m(150, 185, 232, 0.1)[39m, transparent 60%[36m)[39m,
+ [90m 18 | [39m    [36mradial-gradient[39m[36m([39m1000px 700px at -10% 110%, [36mrgba[39m[36m(115, 145, 200, 0.08)[39m, transparent 60%[36m)[39m,
+[1m[31m>[39m[22m[90m 19 | [39m    [36mradial-gradient[39m[36m([39m800px 560px at 55% 42%, [36mrgba[39m[36m(135, 162, 212, 0.05, transparent 70%)[39m[33m;[39m
+ [90m    | [39m                   [1m[31m^[39m[22m
+ [90m 20 | [39m  color[33m:[39m [35m#ededf0[39m[33m;[39m
+ [90m 21 | [39m[33m}[39m
+ GET /detect 500 in 3970ms
+ GET /detect 500 in 64ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled /_error in 1580ms (2659 modules)
+ GET /detect 200 in 2232ms
+ ✓ Compiled in 1556ms (2659 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /detect 200 in 1737ms
+ GET /detect 200 in 1985ms
+ ✓ Compiled in 4.9s (2659 modules)
+ GET / 200 in 503ms
+ GET /detect 200 in 346ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\HP\Documents\Cernovalis\frontend\.next\cache\webpack\server-development\1.pack.gz_' -> 'C:\Users\HP\Documents\Cernovalis\frontend\.next\cache\webpack\server-development\1.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\HP\Documents\Cernovalis\frontend\.next\cache\webpack\client-development\0.pack.gz_' -> 'C:\Users\HP\Documents\Cernovalis\frontend\.next\cache\webpack\client-development\0.pack.gz'
+[?25h
